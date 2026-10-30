@@ -5,6 +5,7 @@
 ![hardencheck scanning a fixture corpus](docs/demo/hardencheck.svg)
 
 [![CI](https://github.com/mgkvibez/infra-hardening-checks/actions/workflows/ci.yml/badge.svg)](https://github.com/mgkvibez/infra-hardening-checks/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/hardencheck.svg)](https://pypi.org/project/hardencheck/)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](pyproject.toml)
 
