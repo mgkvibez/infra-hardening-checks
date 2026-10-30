@@ -38,10 +38,17 @@ PY
 
 echo "== check 5/5: the built wheel actually contains the package"
 tmpd=$(mktemp -d)
-python3 -m build --wheel --outdir "$tmpd" -q >/dev/null 2>&1
+blog=$(mktemp)
+if ! python3 -m build --wheel --outdir "$tmpd" >"$blog" 2>&1; then
+  echo "wheel build failed:"; tail -5 "$blog"; exit 1
+fi
+[ -n "$(ls -A "$tmpd" 2>/dev/null)" ] || { echo "wheel build produced nothing:"; tail -5 "$blog"; exit 1; }
 python3 - "$tmpd" <<'PY'
 import glob, shutil, sys, zipfile
-w = glob.glob(sys.argv[1] + "/*.whl")[0]
+matches = glob.glob(sys.argv[1] + "/*.whl")
+if not matches:
+    sys.exit("no wheel produced")
+w = matches[0]
 inside = [n for n in zipfile.ZipFile(w).namelist() if n.startswith("hardencheck/") and n.endswith(".py")]
 shutil.rmtree(sys.argv[1], ignore_errors=True)
 if len(inside) < 5:
