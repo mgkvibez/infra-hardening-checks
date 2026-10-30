@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hardencheck"
+version = "0.1.0"
+description = "Static hardening checks for Dockerfiles, compose files, Kubernetes manifests and sshd config, with SARIF for CI."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{name = "mgkvibez"}]
+keywords = ["security", "hardening", "docker", "kubernetes", "ci", "sarif"]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+hardencheck = "hardencheck.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["hardencheck*"]

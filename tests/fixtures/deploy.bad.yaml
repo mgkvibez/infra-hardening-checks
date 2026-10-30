@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+spec:
+  template:
+    spec:
+      hostNetwork: true
+      securityContext:
+        runAsNonRoot: false
+      volumes:
+        - name: host
+          hostPath:
+            path: /
+      containers:
+        - name: app
+          image: nginx:latest
+          securityContext:
+            privileged: true
